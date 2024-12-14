@@ -103,6 +103,50 @@ export default function Event() {
               </div>
             </div>
           </div>
+
+          <div class="card mb-3" style={{maxWidth: '100%'}} id="event-card">
+          <div class="row g-0">
+            <div class="col-md-4" id="image-container" >
+              <img src="assets/css/images/default-background.png" class="img-fluid rounded-start" alt="Event Background" id="image-origin"/>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" id="name-origin">Card title <span class="badge text-bg-secondary" id="location-origin"> <i class="fa-solid fa-location-dot"></i> Antipolo</span></h5>
+                <p class="card-text" id="description-origin">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <ul id="time-date-container">
+                    <li class="list-group"> <p class="card-text" id="date-origin"><small class="text-body-secondary">11/12/2024</small></p></li> 
+                    <li class="list-group"> <p class="card-text" id="time-origin"><small class="text-body-secondary">@7:00PM</small></p> </li>
+                  </ul>
+                
+
+                <button type="button" class="btn btn-primary" id="join-event">Join Event</button>
+                <a href="#" class="card-link" id="delete-event">Delete Event</a>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3" style={{maxWidth: '100%'}} id="event-card">
+          <div class="row g-0">
+            <div class="col-md-4" id="image-container" >
+              <img src="assets/css/images/default-background.png" class="img-fluid rounded-start" alt="Event Background" id="image-origin"/>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" id="name-origin">Card title <span class="badge text-bg-secondary" id="location-origin"> <i class="fa-solid fa-location-dot"></i> Antipolo</span></h5>
+                <p class="card-text" id="description-origin">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <ul id="time-date-container">
+                    <li class="list-group"> <p class="card-text" id="date-origin"><small class="text-body-secondary">11/12/2024</small></p></li> 
+                    <li class="list-group"> <p class="card-text" id="time-origin"><small class="text-body-secondary">@7:00PM</small></p> </li>
+                  </ul>
+                
+
+                <button type="button" class="btn btn-primary" id="join-event">Join Event</button>
+                <a href="#" class="card-link" id="delete-event">Delete Event</a>
+              </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
    
