@@ -1,0 +1,131 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bs-body-font-family: "Roboto", sans-serif;
+}
+
+.feature-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: .75rem;
+}
+
+.nav .nav-link {
+    text-decoration: none;
+    font-weight: bold;
+    text-align: end;
+    color: #FA0200 !important;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: "Inknut Antiqua", serif;
+}
+
+.nav-link a {
+    text-decoration: none;
+    font-weight: bold;
+    text-align: end;
+    color: #FA0200;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: "Inknut Antiqua", serif;
+}
+
+#main-logo {
+    height: 32px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+#div-footer {
+    width: 100%;
+    border-top: #cccccc 2px solid;
+    line-height: normal;
+    margin-top: auto;
+}
+
+
+
+#details-container {
+    float: right;
+    background-color: white;
+    
+}
+
+#chapter {
+    margin-bottom: 15px;
+}
+
+#details-container a {
+    text-decoration: none;
+    font-weight: bold;
+    text-align: end;
+    color: #FA0200;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: "Inknut Antiqua", serif;
+}
+
+#details-container h2 {
+    text-align: end;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 300;
+}
+
+#details-container h2:hover {
+    text-decoration: underline;
+    transition: 0.5s;
+}
+
+#contacts-container {
+    float : right;
+    margin-right: 10px;
+    min-height: normal;
+    padding-top: 10px;
+}
+
+#contacts-container h1 {
+    color: black;
+    text-align: center;
+    font-size: 15px;
+}
+
+#contacts-container nav {
+    
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+#contacts-container nav li {
+    list-style-type: none;
+    margin-right: 10px; 
+    display: flex;
+    align-items: center; 
+}
+
+#contacts-container nav li a {
+    text-align: center; 
+    display: inline-block; 
+    color: #717171;
+}
+
+#legal-information {
+    line-height: 100px;
+    
+    float: left;
+    font-size: 12px;
+    color: #717171;
+}
+
+#upper-border .px-4 {
+    border-top: #dddddd 1px solid;
+}
