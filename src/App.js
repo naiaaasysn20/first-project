@@ -11,7 +11,7 @@ import  NoPage  from './pages/NoPage';
 import Header from './components/header';
 import Footer from './components/footer';
 
-function Layout({ children}) {
+function Layout({ children }) {
 	const location = useLocation();
 	const excludePaths = ['/login', '/register'];
 
@@ -30,17 +30,17 @@ function Layout({ children}) {
 export default function App() {
 	  return (
 	<BrowserRouter>
-	  <Layout>
+	  
 	  <Routes>
 	  	<Route index element={<Login />} />
-		<Route path="/home" element={<Home />} />
+		<Route path="/home" element={<Layout><Home /></Layout>} />
 		<Route path="/login" element={<Login />} />
 		<Route path="/register" element={<Register />} />
-		<Route path="/profile" element={<Profile />} />
-		<Route path="/event" element={<Event />} />
-		<Route path="*" element={<NoPage />} />
+		<Route path="/profile" element={<Layout><Profile /></Layout>} />
+		<Route path="/event" element={<Layout><Event /></Layout>} />
+		<Route path="*" element={<Layout><NoPage /></Layout>} />
 	  </Routes>
-	</Layout>
+	
 	</BrowserRouter>
   )
 }

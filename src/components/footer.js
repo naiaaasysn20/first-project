@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-    
-        <div id="div-footer" className="clearfix">
-    <div className='container'>
+<div className='Footer'>
+<div id="div-footer" className="clearfix">
+    <div className='container' id='footer-container'>
         <div id="details-container">
             <a href="index.html" >PresenceLink</a>
             <h2>About us</h2>
@@ -37,7 +37,7 @@ const Footer = () => {
         <div id="legal-information"> All rights reserved <i className="fa-regular fa-copyright"></i></div>
         </div>
      </div>
-    
+     </div>
     )
 };
 

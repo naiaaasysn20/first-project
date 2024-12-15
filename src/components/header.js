@@ -18,7 +18,7 @@ const Header = () => {
             </div>
             
             <div className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <a href="events.html" className="nav-link px-2 link-secondary">Find Events</a>
+                <Link to="/event" className="nav-link px-2 link-secondary">Find Events</Link>
             </div>
     
             <div className="dropdown text-end">
@@ -26,7 +26,7 @@ const Header = () => {
                 <img src={`${process.env.PUBLIC_URL}/assets/css/images/default-image.jpg`} alt="mdo" width="32" height="32" className="rounded-circle" id="profile-pic-small"/>
               </a>
               <ul className="dropdown-menu text-small" style={{}}>
-                <li><Link to="/profile" className="dropdown-item" href="profile.html">Profile</Link></li>
+                <li><Link to="/profile" className="dropdown-item" >Profile</Link></li>
                 <li><hr className="dropdown-divider"/></li>
                 <li><Link to="/Login" className="dropdown-item"> <i className="fa-solid fa-right-from-bracket"></i> Sign out</Link></li>
               </ul>

@@ -1,6 +1,7 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../components/assets/css/login-revised.css';
+import { Link } from 'react-router-dom';
 
 export default function login() {
     return (
@@ -41,7 +42,7 @@ export default function login() {
                                 <button type="submit" className="btn btn-primary login-button" title="Enter Account" id="enter">Enter</button>
                              </div>
                              <div className="form-group">
-                                <a href="register-revised.html" id="dont-have-account">Don't have an account?</a>
+                                <Link to="/register"  id="dont-have-account">Don't have an account?</Link>
                              </div>
                        
                         </form>
