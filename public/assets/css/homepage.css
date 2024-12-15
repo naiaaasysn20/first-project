@@ -44,12 +44,23 @@
     display: block;
 }
 
+.Footer {
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-end;
+}
+
 #div-footer {
     width: 100%;
     border-top: #cccccc 2px solid;
     line-height: normal;
-    margin-top: auto;
+    margin-top: 0;
+
+    
 }
+
+
 
 
 

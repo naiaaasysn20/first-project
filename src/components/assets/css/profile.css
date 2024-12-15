@@ -9,14 +9,13 @@
     --bs-body-font-family: "Roboto", sans-serif;
 }
 
-#wrapper-div {
+/* #wrapper-div {
     width: 80%;
     margin: auto;
-    /*margin-top: 10px; */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
+} */
 
 .top-nav {
     width: 100%;
@@ -49,13 +48,13 @@
     transition: 0.3s;
 }
 
-#top-buttons {
+/* #top-buttons {
     text-decoration: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: #cccccc 2px solid;
-}
+} */
 
 #top-buttons a {
     text-decoration: none;
@@ -188,7 +187,7 @@
 #emailOrig i,
 #chapterOrig i,
 #edit-button i {
-    margin-right: 8px; /* Adjust the value as needed */
+    margin-right: 8px; 
 }
 
 
@@ -268,6 +267,9 @@
     margin: auto; 
 
 }
+
+
+
 
 .name-container h1 {
     line-height: normal;
