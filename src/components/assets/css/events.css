@@ -2,6 +2,25 @@
     --bs-body-font-family: "Roboto", sans-serif;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1; /* Push the footer to the bottom */
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f8f9fa; /* Optional background color */
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
 
 .nav-link a {
     text-decoration: none;
@@ -34,19 +53,19 @@
     height: 100%;
 }
 
-
 #event-search {
     margin-top: 100px;
 }
 
 #image-container {
-    height: 210px;
+    height: 200px;
+    width: 100%;
     overflow: hidden;
 }
 
 #image-container img {
-    height: 100%;
     width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -67,21 +86,30 @@ p {
     margin-bottom: 0;
 }
 
-
-
-
-
 #time-date-container {
-    list-style: none; 
+    list-style: none;
 }
 
 #time-date-container li {
     display: inline-block;
     margin-right: 10px;
-
 }
 
 ul {
     padding-left: 0;
 }
 
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: black; /* Set the close button to black */
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.event-buttons .btn {
+    margin-right: 10px;
+}
