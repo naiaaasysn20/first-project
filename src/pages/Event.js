@@ -1,155 +1,270 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../components/assets/css/events.css';
-
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../components/assets/css/events.css";
 
 export default function Event() {
-    return (
-    <div>
-        <div class="container" id="header-container">
-        <h1 class="main-text">Upcoming events</h1>
-        <div class="col-md-8 ">
-          <h2 class="description-text">Below are the upcoming events for the Lord of The Nations Church. We are excited to have you with us! </h2>
+  const [events, setEvents] = useState([]);
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    date: "",
+    time: "",
+    location: "",
+    image: null,
+  });
+  const [editingEventId, setEditingEventId] = useState(null);
+
+  const handleInputChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "image") {
+      setFormData({ ...formData, image: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const handleCreateEvent = () => {
+    const { name, description, date, time, location, image } = formData;
+
+    if (!name || !description || !date || !time || !location) {
+      alert("Please fill out all fields.");
+      return;
+    }
+    if (description.length > 250) {
+      alert("Description must be less than 250 characters.");
+      return;
+    }
+
+    if (editingEventId) {
+      // Update existing event
+      setEvents((prevEvents) =>
+        prevEvents.map((event) =>
+          event.id === editingEventId
+            ? {
+                ...event,
+                name,
+                description,
+                date,
+                time,
+                location,
+                image: image ? URL.createObjectURL(image) : event.image,
+              }
+            : event
+        )
+      );
+      setEditingEventId(null); // Clear editing state
+    } else {
+      // Create new event
+      const newEvent = {
+        id: Date.now(),
+        name,
+        description,
+        date,
+        time,
+        location,
+        image: image ? URL.createObjectURL(image) : null,
+      };
+      setEvents([...events, newEvent]);
+    }
+
+    // Reset the form
+    setFormData({
+      name: "",
+      description: "",
+      date: "",
+      time: "",
+      location: "",
+      image: null,
+    });
+  };
+
+  const handleJoinEvent = (eventName) => {
+    alert(`You have successfully joined the event: ${eventName}`);
+  };
+
+  const handleEditEvent = (event) => {
+    setFormData({
+      name: event.name,
+      description: event.description,
+      date: event.date,
+      time: event.time,
+      location: event.location,
+      image: null, // Image input resets since it cannot be pre-filled
+    });
+    setEditingEventId(event.id);
+  };
+
+  const handleDeleteEvent = (id) => {
+    setEvents(events.filter((event) => event.id !== id));
+  };
+
+  return (
+  <div className="body-container">
+    <div className="container">
+      {/* Header Section */}
+      <div id="header-container">
+        <h1 className="main-text">Upcoming Events</h1>
+        <p className="description-text">
+          Below are the upcoming events for the Lord of The Nations Church.
+        </p>
+      </div>
+
+      {/* Create Event Section */}
+      <div id="event-search">
+        <div className="row">
+          <div className="col-lg-8 col-sm-12">
+
+          </div>
+          <div className="col-lg-4 col-sm-12 text-end">
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#create-modal"
+            >
+              Create an Event
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="container" id="event-search">
-        <div class="row" >
-          <div class="col-lg-8 col-sm-12">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Find an event" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-              </svg> </button>
+      {/* Modal for Creating or Editing Events */}
+      <div
+        className="modal fade"
+        id="create-modal"
+        tabIndex="-1"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">
+                {editingEventId ? "Edit Event" : "Create an Event"}
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
             </div>
-          </div>
-  
-          <div class="col-lg-4 col-sm-12" id="make-event">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#create-modal">Create an Event</button>
-
-            {/* <!-- Start modal --> */}
-
-          <div class="modal fade"  id="create-modal" aria-hidden="true" tabindex="-1 " aria-labelledby="modal-title">
-
-          
-            <div class="modal-dialog modal-dialog-scrollable">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="scrollableModalLabel">Create an Event</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="event-name" class="col-form-label">Event Name:</label>
-                      <input type="text" class="form-control" id="event-name"/>
-                    </div>
-                    <div class="mb-3">
-                      <label for="event-description" class="col-form-label">Event Description:</label>
-                      <textarea class="form-control" id="event-description"></textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label for="event-date" class="col-form-label">Event Date:</label>
-                      <input type="date" class="form-control" id="event-date"/>
-                    </div>
-                    <div class="mb-3">
-                      <label for="event-time" class="col-form-label">Event Time:</label>
-                      <input type="time" class="form-control" id="event-time"/>
-                    </div>
-                    <div class="mb-3">
-                      <label for="event-location" class="col-form-label">Event Location:</label>
-                      <input type="text" class="form-control" id="event-location"/>
-                    </div>
-                    <div class="mb-3">
-                      <label for="event-image" class="col-form-label">Event Image:</label>
-                      <input type="file" class="form-control" id="event-image" accept="image/*" />
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="create-event" data-bs-dismiss="modal">Create Event</button>
-                </div>
-              </div>
+            <div className="modal-body">
+              <form>
+                <input
+                  type="text"
+                  className="form-control mb-3"
+                  placeholder="Event Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+                <textarea
+                  className="form-control mb-3"
+                  placeholder="Event Description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                ></textarea>
+                <input
+                  type="date"
+                  className="form-control mb-3"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="time"
+                  className="form-control mb-3"
+                  name="time"
+                  value={formData.time}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  className="form-control mb-3"
+                  placeholder="Location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="file"
+                  className="form-control mb-3"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleInputChange}
+                />
+              </form>
             </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      {/* <!-- end of modal --> */}
-      
-
-      {/* <!-- Events will be displayed here --> */}
-      <div class="container">
-        <div class="card mb-3" style={{maxWidth: '100%'}} id="event-card">
-          <div class="row g-0">
-            <div class="col-md-4" id="image-container" >
-              <img src="assets/css/images/default-background.png" class="img-fluid rounded-start" alt="Event Background" id="image-origin"/>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title" id="name-origin">Card title <span class="badge text-bg-secondary" id="location-origin"> <i class="fa-solid fa-location-dot"></i> Antipolo</span></h5>
-                <p class="card-text" id="description-origin">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <ul id="time-date-container">
-                    <li class="list-group"> <p class="card-text" id="date-origin"><small class="text-body-secondary">11/12/2024</small></p></li> 
-                    <li class="list-group"> <p class="card-text" id="time-origin"><small class="text-body-secondary">@7:00PM</small></p> </li>
-                  </ul>
-                
-
-                <button type="button" class="btn btn-primary" id="join-event">Join Event</button>
-                <a href="#" class="card-link" id="delete-event">Delete Event</a>
-              </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mb-3" style={{maxWidth: '100%'}} id="event-card">
-          <div class="row g-0">
-            <div class="col-md-4" id="image-container" >
-              <img src="assets/css/images/default-background.png" class="img-fluid rounded-start" alt="Event Background" id="image-origin"/>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title" id="name-origin">Card title <span class="badge text-bg-secondary" id="location-origin"> <i class="fa-solid fa-location-dot"></i> Antipolo</span></h5>
-                <p class="card-text" id="description-origin">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <ul id="time-date-container">
-                    <li class="list-group"> <p class="card-text" id="date-origin"><small class="text-body-secondary">11/12/2024</small></p></li> 
-                    <li class="list-group"> <p class="card-text" id="time-origin"><small class="text-body-secondary">@7:00PM</small></p> </li>
-                  </ul>
-                
-
-                <button type="button" class="btn btn-primary" id="join-event">Join Event</button>
-                <a href="#" class="card-link" id="delete-event">Delete Event</a>
-              </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mb-3" style={{maxWidth: '100%'}} id="event-card">
-          <div class="row g-0">
-            <div class="col-md-4" id="image-container" >
-              <img src="assets/css/images/default-background.png" class="img-fluid rounded-start" alt="Event Background" id="image-origin"/>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title" id="name-origin">Card title <span class="badge text-bg-secondary" id="location-origin"> <i class="fa-solid fa-location-dot"></i> Antipolo</span></h5>
-                <p class="card-text" id="description-origin">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <ul id="time-date-container">
-                    <li class="list-group"> <p class="card-text" id="date-origin"><small class="text-body-secondary">11/12/2024</small></p></li> 
-                    <li class="list-group"> <p class="card-text" id="time-origin"><small class="text-body-secondary">@7:00PM</small></p> </li>
-                  </ul>
-                
-
-                <button type="button" class="btn btn-primary" id="join-event">Join Event</button>
-                <a href="#" class="card-link" id="delete-event">Delete Event</a>
-              </div>
-              </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-primary"
+                onClick={handleCreateEvent}
+                data-bs-dismiss="modal"
+              >
+                Save Event
+              </button>
             </div>
           </div>
         </div>
       </div>
-   
-);
 
+      {/* Event Cards */}
+      <div id="events-container" style={{ marginTop: "30px" }}>
+        {events.length > 0 ? (
+          events.map((event) => (
+            <div className="card mb-3 position-relative" key={event.id}>
+              <div className="row g-0">
+                <div className="col-md-4">
+                  <div id="image-container">
+                    <img
+                      src={event.image}
+                      className="img-fluid"
+                      alt="Event"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title">{event.name}</h5>
+                    <p className="card-text">{event.description}</p>
+                    <p className="card-text">
+                      <small>{event.date} @ {event.time}</small>
+                    </p>
+                    <p className="card-text">
+                      <strong>Location:</strong> {event.location}
+                    </p>
+                    <div className="event-buttons">
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => handleJoinEvent(event.name)}
+                      >
+                        Join Event
+                      </button>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => handleEditEvent(event)}
+                        data-bs-toggle="modal"
+                        data-bs-target="#create-modal"
+                      >
+                        Edit Event
+                      </button>
+                    </div>
+                    <button
+                      className="close-button"
+                      onClick={() => handleDeleteEvent(event.id)}
+                    >
+                      X
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No events available. Create a new one!</p>
+        )}
+      </div>
+      </div>
+    </div>
+  );
 }

@@ -12,10 +12,16 @@ export default function Profile() {
     };
 
     const buttonClicked = () => {
-        console.log('Edit button clicked!');
-        // Add your logic here
+        document.querySelector(".popup").classList.add("active");
     };
 
+    const buttonConfirmed = () => {
+        document.querySelector(".popup").classList.remove("active");
+    };
+
+    const buttonCancel = () => {
+        document.querySelector(".popup").classList.remove("active");
+    };
 
     return (
   <div>
@@ -55,7 +61,7 @@ export default function Profile() {
                             <h1 id="emailOrig"> <i className="fa-solid fa-envelope"></i> Email</h1>
                             <h1 id="chapterOrig">  <i className="fa-solid fa-location-dot"></i> Chapter</h1>
                            
-                            <button type="button" title="Edit profile" id="edit-button" className="btn btn-primary" onClick={buttonClicked} key={test}> <i className="fa-solid fa-gear"></i> Edit Details</button>
+                            <button type="button" title="Edit profile" id="edit-button" className="btn btn-primary" onClick={buttonClicked}> <i className="fa-solid fa-gear"></i> Edit Details</button>
                             
                         </li>
                     </ul>
@@ -64,7 +70,7 @@ export default function Profile() {
      </div>
 {/* Edit Profile */}
      <div className="popup">
-        <div className="close-button">&times;</div>
+        <div className="close-button"  onClick={buttonCancel}>&times;</div>
         <div className="form">
             <h2>Edit Profile</h2>
             <div className="name-container">
@@ -98,11 +104,11 @@ export default function Profile() {
             </div>
             <div className="main-container-button clearfix">
                 <div className="form-element" id="button-cancel">
-                    <button type="button" className="btn btn-danger">Cancel</button>
+                    <button type="button" className="btn btn-danger" onClick={buttonCancel}>Cancel</button>
 
                 </div>
                 <div className="form-element" id="button-confirm">
-                    <button type="button" className="btn btn-danger" id="confirm">Confirm</button>
+                    <button type="button" className="btn btn-danger" id="confirm" onClick={buttonConfirmed}>Confirm</button>
                 </div>
             </div>
         </div>
