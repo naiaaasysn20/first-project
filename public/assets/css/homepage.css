@@ -45,7 +45,7 @@
 }
 
 .Footer {
-
+    margin-top: 50vh;
     display: flex;
     flex-direction: column; 
     justify-content: flex-end;
@@ -53,11 +53,9 @@
 
 #div-footer {
     width: 100%;
-    border-top: #cccccc 2px solid;
+    border-top: #cccc 1px solid;
     line-height: normal;
     margin-top: 0;
-
-    
 }
 
 
@@ -136,7 +134,7 @@
     font-size: 12px;
     color: #717171;
 }
-
+/* 
 #upper-border .px-4 {
     border-top: #dddddd 1px solid;
-}
+} */

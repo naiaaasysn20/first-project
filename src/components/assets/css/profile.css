@@ -389,12 +389,6 @@
     display: block;
 }
 
-#div-footer {
-    width: 100%;
-    border-top: #cccccc 2px solid;
-    line-height: normal;
-    margin-top: auto;
-}
 
 #details-container {
     float: right;
