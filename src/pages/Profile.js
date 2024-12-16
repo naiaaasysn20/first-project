@@ -55,8 +55,8 @@ export default function Profile() {
                             <h1 id="emailOrig"> <i className="fa-solid fa-envelope"></i> Email</h1>
                             <h1 id="chapterOrig">  <i className="fa-solid fa-location-dot"></i> Chapter</h1>
                            
-                            <button type="button" title="Edit profile" id="edit-button" className="btn btn-primary" onClick={buttonClicked}> <i className="fa-solid fa-gear"></i> Edit Details</button>
-                            <button onClick={() => console.log('Test button clicked!')}>Test Button</button>
+                            <button type="button" title="Edit profile" id="edit-button" className="btn btn-primary" onClick={buttonClicked} key={test}> <i className="fa-solid fa-gear"></i> Edit Details</button>
+                            
                         </li>
                     </ul>
                 </nav>           
