@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../components/assets/css/profile.css';
+// import '../components/assets/js/profile.js';
 
 import React, { useState } from 'react';
 
@@ -9,6 +10,12 @@ export default function Profile() {
     const handleChange = (event) => {
         setSelectedOption(event.target.value);
     };
+
+    const buttonClicked = () => {
+        console.log('Edit button clicked!');
+        // Add your logic here
+    };
+
 
     return (
   <div>
@@ -48,7 +55,8 @@ export default function Profile() {
                             <h1 id="emailOrig"> <i className="fa-solid fa-envelope"></i> Email</h1>
                             <h1 id="chapterOrig">  <i className="fa-solid fa-location-dot"></i> Chapter</h1>
                            
-                            <button type="button" title="Edit profile" id="edit-button" className="btn btn-primary"> <i className="fa-solid fa-gear"></i> Edit Details</button>
+                            <button type="button" title="Edit profile" id="edit-button" className="btn btn-primary" onClick={buttonClicked}> <i className="fa-solid fa-gear"></i> Edit Details</button>
+                            <button onClick={() => console.log('Test button clicked!')}>Test Button</button>
                         </li>
                     </ul>
                 </nav>           
