@@ -1,17 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../components/assets/css/profile.css';
-// import '../components/assets/js/profile.js';
+
 
 import React, { useState } from 'react';
 
 export default function Profile() {
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOption, setSelectedOption, file, set] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         fname: "",
         lname: "",
         username: "",
         email: "",
         chapter: "",
+        
     });
 
     const [editingProfileId, setEditingProfileId] = useState(null);
@@ -19,7 +21,7 @@ export default function Profile() {
     const handleInputChange = (e) => {
         const { name, value, files } = e.target;
         if (name === "image") {
-            setFormData({ ...formData, image: files[0] });
+            setFormData({ ...formData, picture: files[0] });
           } else if (name === "chapter") {
             setSelectedOption(value);
             setFormData({ ...formData, chapter: value });
@@ -29,14 +31,14 @@ export default function Profile() {
     };
 
     const handleUpdateProfile = () => {
-        const { fname, lname, username, email, chapter } = formData;
+        const { fname, lname, username, email, chapter} = formData;
 
         if (!fname || !lname || !username || !email || !chapter) {
             alert("Please fill out all fields.");
             return;
         }
 
-        if (editingProfileId) {
+        else if (editingProfileId) {
             // Update existing profile
             setSelectedOption((prevProfiles) =>
                 prevProfiles.map((profile) =>
@@ -48,11 +50,12 @@ export default function Profile() {
                             username,
                             email,
                             chapter,
+                          
                         }
                         : profile
                 )
             );
-            setEditingProfileId(null); // Clear editing state
+            setEditingProfileId(null);
         } else {
             // Create new profile
             const newProfile = {
@@ -62,28 +65,62 @@ export default function Profile() {
                 username,
                 email,
                 chapter,
+                
             };
 
         }
     };
 
+    const handlePicture = (e) => {
+        const file = e.target.files[0];
+    
+        if (file) {
+            const reader = new FileReader();
+    
+            reader.onloadend = () => {
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    picture: reader.result, 
+                }));
+            };
+    
+            reader.readAsDataURL(file); 
+        } else {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                picture: "",
+            }));
+        }
+    };
+    
     const handleChange = (event) => {
         setSelectedOption(event.target.value);
     };
 
     const buttonClicked = () => {
+        setIsEditing(true);
         document.querySelector(".popup").classList.add("active");
     };
 
     const buttonConfirmed = () => {
+        setIsEditing(false);
         document.querySelector(".popup").classList.remove("active");
     };
 
     const buttonCancel = () => {
+        setFormData({
+            fname: "",
+            lname: "",
+            username: "",
+            email: "",
+            chapter: "",
+        });
+        setSelectedOption(""); 
+        setIsEditing(false);
         document.querySelector(".popup").classList.remove("active");
     };
 
-    const handleButtonClick = () => {
+    const handleButtonClick = async () => {
         buttonConfirmed();
         handleUpdateProfile();
     };
@@ -102,12 +139,12 @@ export default function Profile() {
         <div id="div-profile-picture">
             <div id="div-picture-container" >
                 <div id="picture-frame">
-                    <img src="assets/css/images/default-image.jpg" title="Profile picture" id="profile-pic" alt='Main-picture'/> 
+                    <img src={formData.picture || "/assets/css/images/default-image.jpg"} title="Profile picture" id="profile-pic" alt='Main-picture' /> 
                     
                 </div>
                 <label htmlFor="input-file"> 
                     <i className="fa-solid fa-arrow-up-from-bracket" title="Edit profile picture"></i> </label>
-                  <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file"/>
+                  <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file" onChange={handlePicture} name='picture'/>
                 
             </div>
             <div id="div-name-container">
@@ -144,6 +181,7 @@ export default function Profile() {
                     <label htmlFor="first-name">First Name</label>
                     <input type="text" id="fname" placeholder="Enter First Name" name='fname'
                     onChange={handleInputChange}/>
+                      
                 </div>
 
 
@@ -151,21 +189,25 @@ export default function Profile() {
                     <label htmlFor="last-name">Last Name</label>
                     <input type="text" id="lname" placeholder="Enter Last Name" name='lname'
                     onChange={handleInputChange}/>
+                     
                 </div>
             </div>
             <div className="form-element">
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" placeholder="Enter Username" name='username'
                 onChange={handleInputChange}/>
+               
             </div>
             <div className="form-element">
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" placeholder="Enter Email" name='email'
                 onChange={handleInputChange}/>
+                
             </div>
             <div className="form-element">
                 <label htmlFor="chapter">Chapter</label>
-                <select id="chapter" name="chapter" value={selectedOption} onChange={handleInputChange} >
+                
+                <select id="chapter" name="chapter" value={selectedOption} onChange={handleInputChange}    >
                     <option value="" disabled selected hidden>Edit Chapter</option>
                     <option>Antipolo</option>
                     <option>Arayat</option>
